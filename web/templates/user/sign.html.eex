@@ -1,0 +1,16 @@
+<div class="col-sm-6 col-sm-offset-3 jumbotron">
+
+  <h2 align="center">Identify yourself</h2>
+
+  <%= form_for @changeset, user_path(@conn, :sign), [method: "get"], fn f -> %>
+
+    <div class="form-group">
+        <input type="text" name="username" class="form-control input-lg" placeholder="Username" />
+    </div>
+
+    <div class="form-group">
+      <%= submit "Go", class: "btn btn-primary btn-block btn-lg" %>
+    </div>
+
+  <% end %>
+</div>

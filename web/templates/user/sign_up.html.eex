@@ -1,0 +1,30 @@
+<div class="jumbotron">
+  <h2>Sign up</h2>
+
+  <%= form_for @changeset, user_path(@conn, :sign_up), fn f -> %>
+    <div class="form-group">
+      <%= text_input f, :name, class: "form-control input-lg", placeholder: "Nickname" %>
+      <%= error_tag f, :name %>
+    </div>
+
+    <div class="form-group">
+      <%= text_input f, :username, class: "form-control input-lg", placeholder: "Username" %>
+      <%= error_tag f, :username %>
+    </div>
+
+    <div class="form-group">
+      <%= password_input f, :password, class: "form-control input-lg", placeholder: "Password" %>
+      <%= error_tag f, :password %>
+    </div>
+
+    <div class="form-group">
+      <%= password_input f, :password_confirmation, class: "form-control input-lg", placeholder: "Password confirmation" %>
+      <%= error_tag f, :password_confirmation %>
+    </div>
+
+    <div class="form-group">
+      <%= submit "Go", class: "btn btn-lg btn-primary btn-block" %>
+    </div>
+
+  <% end %>
+</div>

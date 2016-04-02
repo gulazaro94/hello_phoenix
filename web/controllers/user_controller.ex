@@ -12,7 +12,7 @@ defmodule HelloPhoenix.UserController do
 
       if user do
         changeset = User.changeset(user)
-        render "sign_in.html", changeset: changeset
+        render conn, "sign_in.html", changeset: changeset
       else
         changeset = User.changeset(%User{})
         render conn, "sign_up.html", changeset: changeset
@@ -23,7 +23,7 @@ defmodule HelloPhoenix.UserController do
     end
   end
 
-  def sign_up(conn, %{"user" => user_params} = params) do
+  def sign_up(conn, %{"user" => user_params} = _params) do
     changeset = User.changeset(%User{}, user_params)
 
     case Repo.insert(changeset) do
@@ -36,4 +36,15 @@ defmodule HelloPhoenix.UserController do
     end
   end
 
+  def sign_in(conn, %{"user" => user_params} = params) do
+    user = Repo.all(from w in User, where: w.username == ^user_params["username"]) |> List.first
+
+    if user.password == user_params["password"] do
+
+    else
+      conn
+      |> put_flash(:error, "Wrong passoword")
+      |> render("sign_in.html", changeset: User.changeset(user))
+    end
+  end
 end

@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Hello HelloPhoenix!</title>
+    <title>Chat!</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
@@ -15,7 +15,7 @@
     <div class="container">
       <header class="header">
         <nav role="navigation">
-          <h2>Phoenix chat</h2>
+          <h2>Chat</h2>
         </nav>
       </header>
 
@@ -27,6 +27,8 @@
       </main>
 
     </div> <!-- /container -->
+    <script   src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="   crossorigin="anonymous"></script>
+    <script type="text/javascript">window.userToken = "<%= assigns[:token] %>"</script>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>

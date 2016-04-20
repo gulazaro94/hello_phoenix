@@ -1,7 +1,7 @@
 <div class="jumbotron">
   <h2>Sign up</h2>
 
-  <%= form_for @changeset, user_path(@conn, :sign_up), fn f -> %>
+  <%= form_for @changeset, user_path(@conn, :sign_up), [method: "post"] , fn f -> %>
     <div class="form-group">
       <%= text_input f, :name, class: "form-control input-lg", placeholder: "Nickname" %>
       <%= error_tag f, :name %>

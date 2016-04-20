@@ -76,3 +76,39 @@ form.link, form.button {
     border-bottom: 0;
   }
 }
+
+#messages {
+  padding: 20px;
+  height: 400px;
+  overflow-y: scroll;
+  background: #EFEFEF;
+}
+
+.message {
+  padding: 5px;
+  border-radius: 4px;
+  margin: 5px;
+  display: inline-block;
+}
+
+.message:not(.mine) {
+  background: #DADADA;
+}
+
+.message.mine {
+  background: #4DBB7F;
+}
+
+.message hr {
+  margin: 0px -3px 3px -3px;
+}
+
+.message .username {
+  color: gray;
+  font-size: 10px;
+}
+
+.message .body {
+  padding: 0 3px;
+  font-weight: bold;
+}

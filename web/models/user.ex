@@ -26,4 +26,10 @@ defmodule HelloPhoenix.User do
     |> validate_length(:password, min: 6)
     |> validate_confirmation(:password)
   end
+
+  def changeset(model, params, false) do
+    model
+    |> cast(params, [], @optional_fields)
+  end
+
 end

@@ -1,0 +1,9 @@
+<h2>Messages to the world</h2>
+
+<div id="messages">
+  <%= for message <- @messages do %>
+    <%= render "_message.html", message: message, user_id: @user_id %>
+  <% end %>
+</div>
+
+<input type="text" id="chat-input" class="form-control input-lg" placeholder="Give your message to the world"></input>

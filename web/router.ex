@@ -19,6 +19,7 @@ defmodule HelloPhoenix.Router do
     get "/", UserController, :sign
     post "/sign_up", UserController, :sign_up
     post "/sign_in", UserController, :sign_in
+    get "/chat", UserController, :chat
   end
 
   # Other scopes may use custom stacks.

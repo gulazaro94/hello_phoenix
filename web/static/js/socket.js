@@ -5,7 +5,7 @@
 // and connect at the socket path in "lib/my_app/endpoint.ex":
 import {Socket} from "phoenix"
 
-let socket = new Socket("/socket", {params: {token: window.userToken}})
+let socket = new Socket("/socket")
 
 // When you connect, you'll often need to authenticate the client.
 // For example, imagine you have an authentication plug, `MyAuth`,
@@ -53,10 +53,28 @@ let socket = new Socket("/socket", {params: {token: window.userToken}})
 
 socket.connect()
 
+function mountMessage(payload){
+  let html = '<div class="message" data-id="' + payload.message.id + '">'
+}
+
 // Now that you are connected, you can join channels with a topic:
-let channel = socket.channel("rooms:lobby", {})
+let channel = socket.channel("rooms:lobby", {token: window.userToken})
+let chatInput = $('#chat-input')
+let messages = $('#messages')
+
 channel.join()
   .receive("ok", resp => { console.log("Joined successfully", resp) })
   .receive("error", resp => { console.log("Unable to join", resp) })
+
+channel.on("new_message", payload => {
+  messages.append(payload.message.message + '<br>')
+})
+
+chatInput.on('keypress', event => {
+  if(event.keyCode == 13 && chatInput.val() != ''){
+    channel.push("new_message", {body: chatInput.val()})
+    chatInput.val('')
+  }
+})
 
 export default socket

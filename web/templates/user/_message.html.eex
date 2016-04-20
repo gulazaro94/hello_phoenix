@@ -1,0 +1,15 @@
+<div class="message<%= if @message.user_id == @user_id, do: " mine" %>" data-id="<%= @message.id %>">
+  <%= if @message.user_id != @user_id do %>
+    <div class="username">
+      <%= @message.user.name %>
+    </div>
+    <hr>
+  <% end %>
+
+    <div class="body">
+      <%= @message.message %>
+    </div>
+
+</div>
+
+<br>

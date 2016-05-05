@@ -52,7 +52,7 @@ defmodule HelloPhoenix.UserController do
 
   def chat(conn, _params) do
     if user_id = get_session(conn, :user_id) do
-      messages = Message |> Message.includes_user |> Repo.all(limit: 15)
+      messages = Message |> Message.includes_user |> Message.most_recent(20) |> Repo.all |> Enum.reverse
       render(conn, "chat.html", messages: messages, token: Phoenix.Token.sign(conn, "user", user_id), user_id: user_id)
     else
       conn

@@ -26,4 +26,8 @@ defmodule HelloPhoenix.Message do
   def includes_user(query) do
     from q in query, preload: [:user]
   end
+
+  def most_recent(query, limit) do
+    from q in query, limit: ^limit, order_by: [desc: q.id]
+  end
 end

@@ -1,4 +1,4 @@
-<h2>Messages to the world</h2>
+<h2>Let your message</h2>
 
 <div id="messages">
   <%= for message <- @messages do %>
@@ -7,3 +7,7 @@
 </div>
 
 <input type="text" id="chat-input" class="form-control input-lg" placeholder="Give your message to the world"></input>
+
+<script type="text/javascript">
+  window.userId = <%= @user_id %>;
+</script>

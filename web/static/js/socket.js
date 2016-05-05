@@ -54,7 +54,20 @@ let socket = new Socket("/socket")
 socket.connect()
 
 function mountMessage(payload){
-  let html = '<div class="message" data-id="' + payload.message.id + '">'
+  let html = '<div class="message' + (payload.user_id == window.userId ? ' mine' : '') + '" data-id="' + payload.id + '">'
+  if(payload.user_id != window.userId){
+    html += '<div class="username">' + payload.user_name + '</div><hr>'
+  }
+  html += '<div class="body">' + payload.message + '</div></div><br>'
+  return html;
+}
+
+function scrollMessages(payload){
+  console.log(messages.scrollTop() + messages.innerHeight())
+  console.log(messages[0].scrollHeight - 20)
+  if(payload.user_id == window.userId || messages.scrollTop() + messages.innerHeight() >= messages[0].scrollHeight - 88){
+    messages.scrollTop(messages[0].scrollHeight);
+  }
 }
 
 // Now that you are connected, you can join channels with a topic:
@@ -67,7 +80,8 @@ channel.join()
   .receive("error", resp => { console.log("Unable to join", resp) })
 
 channel.on("new_message", payload => {
-  messages.append(payload.message.message + '<br>')
+  messages.append(mountMessage(payload))
+  scrollMessages(payload)
 })
 
 chatInput.on('keypress', event => {
@@ -75,6 +89,10 @@ chatInput.on('keypress', event => {
     channel.push("new_message", {body: chatInput.val()})
     chatInput.val('')
   }
+})
+
+$(document).ready(function(){
+  messages.scrollTop(messages[0].scrollHeight);
 })
 
 export default socket

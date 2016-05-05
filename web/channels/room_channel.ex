@@ -26,9 +26,7 @@ defmodule HelloPhoenix.RoomChannel do
       case Repo.insert(changeset) do
         {:ok, changeset} ->
           user = Repo.get(HelloPhoenix.User, changeset.user_id)
-          broadcast! socket, "new_message", %{message:
-            %{id: changeset.id, message: changeset.message, user_name: user.name, user_id: changeset.user_id}
-          }
+          broadcast! socket, "new_message", %{id: changeset.id, message: changeset.message, user_name: user.name, user_id: changeset.user_id}
         _ ->
       end
     end
